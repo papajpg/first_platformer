@@ -1,12 +1,17 @@
 extends Node2D
 
+
+
 const SPEED = 60
 var direction = 1
 
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var ray_cast_up: RayCast2D = $RayCastUp
+@onready var killzone: Area2D = $killzone
+@onready var damagezone: Area2D = $damagezone
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -18,10 +23,24 @@ func _process(delta: float) -> void:
 		direction = -1
 		animated_sprite_2d.flip_h = true
 
+func _on_damagezone_player_jumped() -> void:
+	direction = 0
+	$killzone.queue_free()
+	animated_sprite_2d.play("damage")
+	animation_player.play("on_slime_death")
+	#animated_sprite_2d.play("damage")
+		
 
+
+	#if ray_cast_up.is_colliding():
+	#	direction = 0
+	#	animated_sprite_2d.play("damage")
+		
+		#print(ray_cast_up.get_collision_point().y)
+		#print(position)
+		#print("yup")
 		
 	
-	
-
-
-	
+		#print("yeah")
+		#animated_sprite_2d.play("damage")
+		
