@@ -1,34 +1,39 @@
-[gd_scene load_steps=13 format=3 uid="uid://byhedmeshydh0"]
+[gd_scene load_steps=19 format=3 uid="uid://byhedmeshydh0"]
 
 [ext_resource type="Script" uid="uid://c8i1f8uku3ncj" path="res://Scripts/slime.gd" id="1_aiwxb"]
 [ext_resource type="Texture2D" uid="uid://ca6mc250i1l72" path="res://Assets/sprites/slime_purple.png" id="1_jokqx"]
-[ext_resource type="PackedScene" uid="uid://dt72t8he2de0c" path="res://Scenes/killzone.tscn" id="2_swwnm"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gljc"]
-atlas = ExtResource("1_jokqx")
-region = Rect2(0, 48, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vblni"]
-atlas = ExtResource("1_jokqx")
-region = Rect2(24, 48, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e388w"]
-atlas = ExtResource("1_jokqx")
-region = Rect2(48, 48, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_swwnm"]
-atlas = ExtResource("1_jokqx")
-region = Rect2(0, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aiwxb"]
-atlas = ExtResource("1_jokqx")
-region = Rect2(24, 24, 24, 24)
+[ext_resource type="PackedScene" uid="uid://dt72t8he2de0c" path="res://Assets/fonts/killzone.tscn" id="2_swwnm"]
+[ext_resource type="PackedScene" uid="uid://7eygqh0vjres" path="res://Scenes/damagezone.tscn" id="4_paq7w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_paq7w"]
 atlas = ExtResource("1_jokqx")
-region = Rect2(48, 24, 24, 24)
+region = Rect2(0, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f4si1"]
+atlas = ExtResource("1_jokqx")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gljc"]
+atlas = ExtResource("1_jokqx")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vblni"]
+atlas = ExtResource("1_jokqx")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e388w"]
+atlas = ExtResource("1_jokqx")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4o34"]
+atlas = ExtResource("1_jokqx")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y26kt"]
+atlas = ExtResource("1_jokqx")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ij5"]
 atlas = ExtResource("1_jokqx")
 region = Rect2(72, 24, 24, 24)
 
@@ -36,41 +41,95 @@ region = Rect2(72, 24, 24, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_paq7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4si1")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5gljc")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vblni")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e388w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e388w")
 }],
-"loop": true,
+"loop": false,
 "name": &"damage",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_swwnm")
+"texture": SubResource("AtlasTexture_e388w")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aiwxb")
+"texture": SubResource("AtlasTexture_r4o34")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_paq7w")
+"texture": SubResource("AtlasTexture_y26kt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f4si1")
+"texture": SubResource("AtlasTexture_c7ij5")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4si1"]
+size = Vector2(10, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swwnm"]
-size = Vector2(8, 12)
+size = Vector2(10, 10)
+
+[sub_resource type="Animation" id="Animation_paq7w"]
+resource_name = "on_slime_death"
+length = 0.65
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("killzone/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_f4si1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("killzone/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4si1"]
+_data = {
+&"RESET": SubResource("Animation_f4si1"),
+&"on_slime_death": SubResource("Animation_paq7w")
+}
 
 [node name="slime" type="Node2D"]
 script = ExtResource("1_aiwxb")
@@ -81,20 +140,34 @@ sprite_frames = SubResource("SpriteFrames_5gljc")
 animation = &"damage"
 autoplay = "idle"
 
+[node name="damagezone" parent="." instance=ExtResource("4_paq7w")]
+position = Vector2(-9, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damagezone"]
+position = Vector2(9, -1.5)
+shape = SubResource("RectangleShape2D_f4si1")
+
 [node name="killzone" parent="." instance=ExtResource("2_swwnm")]
+collision_layer = 1
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
-position = Vector2(0, -6)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_swwnm")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
 target_position = Vector2(7, 0)
+collision_mask = 2
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
 target_position = Vector2(-7, 0)
+collision_mask = 2
 
-[node name="RayCastUp" type="RayCast2D" parent="."]
-position = Vector2(0, -6)
-target_position = Vector2(0, -6)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f4si1")
+}
+
+[connection signal="player_jumped" from="damagezone" to="." method="_on_damagezone_player_jumped"]
